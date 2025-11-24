@@ -1,13 +1,13 @@
 // --- 12. Navegación ---
 package mx.edu.utez.mediaappingenium.ui
 
-import android.R.attr.type
 import android.app.Application
 import android.net.Uri
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import mx.edu.utez.mediaappingenium.data.repository.AudioRecorder
 import mx.edu.utez.mediaappingenium.ui.screens.AudioListScreen
 import mx.edu.utez.mediaappingenium.ui.screens.ImageListScreen
 import mx.edu.utez.mediaappingenium.ui.screens.RecordingScreen
@@ -40,6 +41,8 @@ fun AppNavigation() {
     val playbackViewModel: PlaybackViewModel = viewModel(
         factory = PlaybackViewModelFactory(application)
     )
+    // AudioRecorder para la grabación de audio
+    val audioRecorder = remember { AudioRecorder(context) }
     Scaffold(
         bottomBar = {
             AppBottomNavBar(navController = navController)
@@ -53,7 +56,7 @@ fun AppNavigation() {
             composable(Screen.Recording.route) {
                 RecordingScreen(
                     mediaViewModel = mediaViewModel,
-                    audioRecorder = TODO()
+                    audioRecorder = audioRecorder
                 )
             }
             composable(Screen.AudioList.route) {
@@ -79,7 +82,7 @@ fun AppNavigation() {
                 val uri = backStackEntry.arguments?.getString("uri")
                 if (uri != null) {
                     VideoPlayerScreen(
-                        uri = Uri.decode(uri),
+                        uri = Uri.parse(Uri.decode(uri)),
                         playbackViewModel = playbackViewModel
                     )
                 }

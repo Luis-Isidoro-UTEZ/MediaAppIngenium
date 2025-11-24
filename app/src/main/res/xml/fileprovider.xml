@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?> <!-- 14. FileProvider -->
+<paths>
+    <!--
+    Define la carpeta "files" externa de nuestra app.
+    Corresponde a context.getExternalFilesDir(null)
+
+    El 'name' es un alias, y el 'path' es la subcarpeta ('.' significa la raíz)
+    -->
+    <external-files-path
+        name="my_media"
+        path="." />
+</paths>

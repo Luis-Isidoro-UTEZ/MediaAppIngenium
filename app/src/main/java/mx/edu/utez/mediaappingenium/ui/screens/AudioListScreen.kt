@@ -1,8 +1,6 @@
 // --- 16. Screen 2: Lista de Audio ---
 package mx.edu.utez.mediaappingenium.ui.screens
 
-import android.R.attr.fontWeight
-import android.R.attr.maxLines
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,10 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AudioFile
 import androidx.compose.material.icons.filled.Audiotrack
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material.icons.filled.SensorsOff
 import androidx.compose.material.icons.filled.SmartDisplay
@@ -35,6 +30,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -68,19 +64,24 @@ fun AudioListScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Mis Audios") },
+                title = { Text("Mis Audios", color = Color.White, fontWeight = FontWeight.Bold) },
                 actions = {
                     Text(
                         text = "Vol: ${(currentVolume * 100).toInt()}%",
-                        modifier = Modifier.padding(end = 8.dp)
+                        modifier = Modifier.padding(end = 8.dp),
+                        color = Color.White
                     )
                     IconButton(onClick = { playbackViewModel.toggleAccelerometer() }) {
                         Icon(
                             if (isAccelerometerOn) Icons.Default.Sensors else Icons.Default.SensorsOff,
-                            contentDescription = "Control por Acelerómetro"
+                            contentDescription = "Control por Acelerómetro",
+                            tint = Color.White
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color(0xFF052659)
+                )
             )
         }
     ) { padding ->

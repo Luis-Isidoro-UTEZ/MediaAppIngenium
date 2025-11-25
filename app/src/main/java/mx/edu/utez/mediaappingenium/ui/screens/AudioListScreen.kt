@@ -87,6 +87,7 @@ fun AudioListScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .background(Color(0xff06141B))
                 .padding(padding),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)

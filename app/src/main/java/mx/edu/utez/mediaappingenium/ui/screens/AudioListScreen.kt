@@ -1,6 +1,8 @@
 // --- 16. Screen 2: Lista de Audio ---
 package mx.edu.utez.mediaappingenium.ui.screens
 
+import android.R.attr.fontWeight
+import android.R.attr.maxLines
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,10 +19,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AudioFile
+import androidx.compose.material.icons.filled.Audiotrack
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material.icons.filled.SensorsOff
+import androidx.compose.material.icons.filled.SmartDisplay
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -120,36 +125,43 @@ fun AudioCard(
     onPlayClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
+
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .background(Color(0xff4a5c6a))
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                Icons.Default.AudioFile,
+                Icons.Default.Audiotrack,
                 contentDescription = "Audio",
+                tint = Color(0xFFccd0cf),
                 modifier = Modifier.size(40.dp)
             )
+
             Spacer(Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = item.name,
+                    color = (Color(0xFFccd0cf)),
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = formatDuration(item.duration),
+                    color = (Color(0xFFccd0cf)),
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
                     text = formatDate(item.date),
+                    color = (Color(0xFFccd0cf)),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Gray
                 )
             }
             Spacer(Modifier.width(16.dp))
@@ -161,7 +173,7 @@ fun AudioCard(
                     .background(MaterialTheme.colorScheme.primary)
             ) {
                 Icon(
-                    if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
+                    if (isPlaying) Icons.Default.Stop else Icons.Default.SmartDisplay,
                     contentDescription = "Play/Pause",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
